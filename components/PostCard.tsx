@@ -104,8 +104,8 @@ export const PostCard: React.FC<PostCardProps> = ({ post }) => {
           
           {post.type === 'text' && post.content && (
              <div className="relative">
-                {/* Content: Changed text-gray-300 to text-[#B7CAD4] and ensured font-normal */}
-                <p className="text-sm sm:text-base text-[#B7CAD4] font-normal leading-relaxed break-words">
+                {/* Content: Changed text-gray-300 to text-[#B7CAD4] and ensured font-normal. Added line-clamp-6. */}
+                <p className="text-sm sm:text-base text-[#B7CAD4] font-normal leading-relaxed break-words line-clamp-6">
                   {post.content}
                 </p>
                 {/* Fade out effect for long text if truncated (optional aesthetic) */}
