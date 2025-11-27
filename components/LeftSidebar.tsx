@@ -1,39 +1,36 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 
 interface LeftSidebarProps {
   isOpen: boolean;
 }
 
 export const LeftSidebar: React.FC<LeftSidebarProps> = ({ isOpen }) => {
-  
   const menuItems = [
-    { icon: 'home', text: 'Лента', path: '/' },
-    { icon: 'trending_up', text: 'Популярное', path: '/popular' },
-    { icon: 'groups', text: 'Сообщества', path: '/communities' },
+    { icon: 'home', text: 'Лента', active: true },
+    { icon: 'trending_up', text: 'Популярное' },
+    { icon: 'groups', text: 'Сообщества' },
   ];
 
   const navItems = [
-    { icon: 'info', text: 'О Postrr', path: '/about' },
-    { icon: 'campaign', text: 'Реклама', path: '/ads' },
-    { icon: 'help_center', text: 'Справка', path: '/help' },
-    { icon: 'currency_exchange', text: 'Инвесторам', path: '/investors' },
+    { icon: 'info', text: 'О Postrr' },
+    { icon: 'campaign', text: 'Реклама' },
+    { icon: 'help_center', text: 'Справка' },
+    { icon: 'currency_exchange', text: 'Инвесторам' },
   ];
 
   const legalItems = [
-    { icon: 'gavel', text: 'Правила Postrr', path: '/rules' },
-    { icon: 'policy', text: 'Политика конфиденциальности', path: '/privacy' },
-    { icon: 'description', text: 'Пользовательское соглашение', path: '/terms' },
+    { icon: 'gavel', text: 'Правила Postrr' },
+    { icon: 'policy', text: 'Политика конфиденциальности' },
+    { icon: 'description', text: 'Пользовательское соглашение' },
   ];
 
-  const renderItem = (item: { icon: string; text: string; path: string }, index: number) => (
-    <NavLink
+  const renderItem = (item: { icon: string; text: string; active?: boolean }, index: number) => (
+    <button
       key={index}
-      to={item.path}
-      className={({ isActive }) => `
+      className={`
         w-full flex items-center gap-4 px-4 py-3 
         rounded-xl text-left transition-colors duration-200
-        ${isActive 
+        ${item.active 
           ? 'bg-[#2C3236] text-white' 
           : 'text-gray-400 hover:bg-[#2C3236]/50 hover:text-gray-200'
         }
@@ -41,7 +38,7 @@ export const LeftSidebar: React.FC<LeftSidebarProps> = ({ isOpen }) => {
     >
       <span className="material-symbols-rounded text-[24px]">{item.icon}</span>
       <span className="font-medium text-[15px]">{item.text}</span>
-    </NavLink>
+    </button>
   );
 
   return (
