@@ -1,36 +1,40 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 interface LeftSidebarProps {
   isOpen: boolean;
+  onClose?: () => void; // Optional prop to close sidebar on mobile click
 }
 
-export const LeftSidebar: React.FC<LeftSidebarProps> = ({ isOpen }) => {
+export const LeftSidebar: React.FC<LeftSidebarProps> = ({ isOpen, onClose }) => {
   const menuItems = [
-    { icon: 'home', text: 'Лента', active: true },
-    { icon: 'trending_up', text: 'Популярное' },
-    { icon: 'groups', text: 'Сообщества' },
+    { icon: 'home', text: 'Лента', path: '/' },
+    { icon: 'trending_up', text: 'Популярное', path: '/popular' },
+    { icon: 'groups', text: 'Сообщества', path: '/communities' },
   ];
 
   const navItems = [
-    { icon: 'info', text: 'О Postrr' },
-    { icon: 'campaign', text: 'Реклама' },
-    { icon: 'help_center', text: 'Справка' },
-    { icon: 'currency_exchange', text: 'Инвесторам' },
+    { icon: 'info', text: 'О Postrr', path: '/about' },
+    { icon: 'campaign', text: 'Реклама', path: '/ads' },
+    { icon: 'help_center', text: 'Справка', path: '/help' },
+    { icon: 'currency_exchange', text: 'Инвесторам', path: '/investors' },
   ];
 
   const legalItems = [
-    { icon: 'gavel', text: 'Правила Postrr' },
-    { icon: 'policy', text: 'Политика конфиденциальности' },
-    { icon: 'description', text: 'Пользовательское соглашение' },
+    { icon: 'gavel', text: 'Правила Postrr', path: '/rules' },
+    { icon: 'policy', text: 'Политика конфиденциальности', path: '/privacy' },
+    { icon: 'description', text: 'Пользовательское соглашение', path: '/terms' },
   ];
 
-  const renderItem = (item: { icon: string; text: string; active?: boolean }, index: number) => (
-    <button
+  const renderItem = (item: { icon: string; text: string; path: string }, index: number) => (
+    <NavLink
       key={index}
-      className={`
+      to={item.path}
+      onClick={onClose}
+      className={({ isActive }) => `
         w-full flex items-center gap-4 px-4 py-3 
         rounded-xl text-left transition-colors duration-200
-        ${item.active 
+        ${isActive 
           ? 'bg-[#2C3236] text-white' 
           : 'text-gray-400 hover:bg-[#2C3236]/50 hover:text-gray-200'
         }
@@ -38,7 +42,7 @@ export const LeftSidebar: React.FC<LeftSidebarProps> = ({ isOpen }) => {
     >
       <span className="material-symbols-rounded text-[24px]">{item.icon}</span>
       <span className="font-medium text-[15px]">{item.text}</span>
-    </button>
+    </NavLink>
   );
 
   return (
